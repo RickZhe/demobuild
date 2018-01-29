@@ -1,0 +1,16 @@
+---
+- hosts: allhost
+  vars:
+     # Create wit: python -c 'import crypt; print crypt.crypt("password", "username")'
+     password: ansgBMFkfptE6
+  tasks:
+    - name: Create CentOS account
+      user: comment="Additional user account" name="andy" group="wheel" state=present password={{password}}
+      register: user_created
+      when: ansible_os_family == "RedHat"
+
+    - name: Create Ubuntu account
+      user: comment="Additional user account" name="andy" group="sudo" state=present password={{password}}
+      register: user_created
+      when: ansible_os_family == "Debian"
+

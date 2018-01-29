@@ -1,0 +1,5 @@
+---
+- hosts: allhost
+  tasks:
+  - name: Remove user
+    user: name=andy state=absent remove=yes

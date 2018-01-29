@@ -1,0 +1,17 @@
+[ubuntu]
+ans1.house.lan
+ans2.house.lan
+
+[centos]
+192.168.99.212
+
+[db]
+ans3.house.lan
+
+
+[allhost:children]
+ubuntu
+db
+centos
+
+[allhost:vars]
