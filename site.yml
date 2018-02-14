@@ -1,8 +1,0 @@
----
-- hosts: webservers:dbservers
-  gather_facts: no
-  roles:
-  - server-common
-
-- include: dbserver.yml
-- include: webserver.yml

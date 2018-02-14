@@ -1,5 +1,0 @@
----
-- hosts: dbservers
-  roles:
-  - dbservers
-  gather_facts: no
