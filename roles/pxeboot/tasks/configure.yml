@@ -32,3 +32,24 @@
   notify:
    - restart networking service
 
+
+- name: Upload tftp file
+  copy:
+    src: tftpd-hpa
+    dest: /etc/default/tftpd-hpa
+    owner: root
+    group: root
+    mode: 0644
+    backup: yes
+
+- name: Upload inetd.conf file and restart tftp  service
+  copy:
+    src: inetd.conf
+    dest: /etc/inetd.conf
+    owner: root
+    group: root
+    mode: 0644
+    backup: yes
+  notify:
+   - restart tftpd-hpa service
+

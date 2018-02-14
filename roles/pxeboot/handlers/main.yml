@@ -12,3 +12,9 @@
   service:
     name: networking
     state: restarted
+
+- name: restart tftpd-hpa service
+  service:
+    name: tftpd-hpa
+    state: restarted
+
