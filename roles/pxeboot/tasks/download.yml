@@ -1,0 +1,17 @@
+---
+# download the build images
+- name: DL the Ubuntu 16.04 iso file
+  get_url:
+    url: http://archive.ubuntu.com/ubuntu/dists/xenial/main/installer-amd64/current/images/netboot/mini.iso
+    dest: /tmp/ubuntu16mini.iso
+    mode: 0777
+
+
+- name: Create directory for iso images
+  file:
+    path: /var/www/html/ubuntu16
+    state: directory
+    mode: 0755
+
+- name: Mount the iso and copy 
+  shell: mount -o loop /tmp/ubuntu16mini.iso /mnt/
