@@ -4,3 +4,9 @@
   service:
     name: isc-dhcp-server
     state: started
+
+- name: starting networking
+  service:
+    name: networking
+    state: started
+

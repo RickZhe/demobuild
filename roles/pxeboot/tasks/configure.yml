@@ -20,3 +20,15 @@
     group: root
     mode: 0644
     backup: yes
+
+- name: Upload Ethernet 2nd adapter  and restart Networking service
+  copy:
+    src: interfaces
+    dest: /etc/network/interfaces
+    owner: root
+    group: root
+    mode: 0644
+    backup: yes
+  notify:
+   - restart networking service
+
