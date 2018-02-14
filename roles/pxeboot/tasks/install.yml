@@ -4,6 +4,7 @@
   apt: name={{item}} state=installed update_cache=true
   with_items:
   - htop
+  - tree
   - open-vm-tools
   - isc-dhcp-server
   - apache2

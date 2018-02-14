@@ -2,8 +2,8 @@
 # download the build images
 - name: DL the Ubuntu 16.04 iso file
   get_url:
-    url: http://archive.ubuntu.com/ubuntu/dists/xenial/main/installer-amd64/current/images/netboot/mini.iso
-    dest: /tmp/ubuntu16mini.iso
+    url: http://releases.ubuntu.com/16.04/ubuntu-16.04.3-server-amd64.iso
+    dest: /tmp/ubuntu-16.04.3-server-amd64.iso
     mode: 0777
 
 
@@ -14,4 +14,30 @@
     mode: 0755
 
 - name: Mount the iso and copy 
-  shell: mount -o loop /tmp/ubuntu16mini.iso /mnt/
+  shell: mount -o loop /tmp/ubuntu-16.04.3-server-amd64.iso /mnt/
+
+- name: Cp the mounted iso installer
+  shell: cp -fr /mnt/install/netboot/* /var/lib/tftpboot/
+
+
+#- name: Upload Pxeboot Menu config file
+#  copy:
+#    src: default_pxeMenu
+#    dest: /var/lib/tftpboot/pxelinux.cfg/default
+#    owner: root
+#    group: root
+#    mode: 0644
+#    backup: yes
+
+#- name: Upload Pxeboot menu.c32 config file
+#  copy:
+#    src: menu.c32
+#    dest: /var/lib/tftpboot/menu.c32
+#    owner: root
+#    group: root
+#    mode: 0744
+
+
+- name: Cp the mounted iso package to www
+  shell: cp -fr /mnt/* /var/www/html/ubuntu16
+
