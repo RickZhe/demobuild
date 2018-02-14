@@ -10,3 +10,8 @@
     name: networking
     state: started
 
+- name: starting tftpd
+  service:
+    name: tftpd-hpa
+    state: started
+
