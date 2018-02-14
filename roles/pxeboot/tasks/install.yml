@@ -1,0 +1,30 @@
+---
+# tasks file for pxeboot
+- name: Install PXEboot  packages
+  apt: name={{item}} state=installed update_cache=true
+  with_items:
+  - htop
+  - open-vm-tools
+  - isc-dhcp-server
+  - apache2
+  - tftpd-hpa
+  - inetutils-inetd
+  when: ansible_os_family == "Debian"
+
+- name: Upload DHCP configure and restart DHCP service
+  copy:
+    src: dhcpd.conf
+    dest: /etc/dhcp/dhcpd.conf
+    owner: root
+    group: root
+    mode: 0644
+    backup: yes
+
+- name: Upload DHCP interface config
+  copy:
+    src: isc-dhcp-server
+    dest: /etc/default/isc-dhcp-server
+    owner: root
+    group: root
+    mode: 0644
+    backup: yes
