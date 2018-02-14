@@ -1,6 +1,6 @@
 galaxy_info:
-  author: your name
-  description: your description
+  author: Rick Zheng
+  description: build pxeboot server
   company: your company (optional)
 
   # If the issue tracker for your role is not on github, uncomment the
@@ -32,7 +32,8 @@ galaxy_info:
   #
   # platforms is a list of platforms, and each platform has a name and a list of versions.
   #
-  # platforms:
+  platforms:
+    - ubuntu 16.4
   # - name: Fedora
   #   versions:
   #   - all

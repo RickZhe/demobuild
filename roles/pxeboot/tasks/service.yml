@@ -1,0 +1,6 @@
+---
+# start isc-dhcp-server service
+- name: starting isc-dhcp-server
+  service:
+    name: isc-dhcp-server
+    state: started
