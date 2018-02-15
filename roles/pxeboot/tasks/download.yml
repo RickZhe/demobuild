@@ -19,25 +19,28 @@
 - name: Cp the mounted iso installer
   shell: cp -fr /mnt/install/netboot/* /var/lib/tftpboot/
 
-
-#- name: Upload Pxeboot Menu config file
-#  copy:
-#    src: default_pxeMenu
-#    dest: /var/lib/tftpboot/pxelinux.cfg/default
-#    owner: root
-#    group: root
-#    mode: 0644
-#    backup: yes
-
-#- name: Upload Pxeboot menu.c32 config file
-#  copy:
-#    src: menu.c32
-#    dest: /var/lib/tftpboot/menu.c32
-#    owner: root
-#    group: root
-#    mode: 0744
-
+## After the tftp copied, upload the pre-configure menu
+- name: Upload Pxeboot Menu config file
+  copy:
+    src: syslinux.cfg
+    dest: /var/lib/tftpboot/ubuntu-installer/amd64/boot-screens/
+    owner: root
+    group: root
+    mode: 0444
+    backup: yes
 
 - name: Cp the mounted iso package to www
   shell: cp -fr /mnt/* /var/www/html/ubuntu16
 
+## After the build been copy over, upload the ks file
+- name: Upload kickstart file
+  copy:
+    src: ks.cfg
+    dest: /var/www/html/ubuntu16
+    owner: root
+    group: root
+    mode: 0444
+    backup: yes
+
+- name: umount the iso file
+  shell: umount /mnt/

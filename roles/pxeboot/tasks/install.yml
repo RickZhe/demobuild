@@ -10,4 +10,5 @@
   - apache2
   - tftpd-hpa
   - inetutils-inetd
+  - syslinux
   when: ansible_os_family == "Debian"
