@@ -1,22 +1,21 @@
 ---
-# download the build images
-- name: DL the Ubuntu 16.04 iso file
+# download the Ubuntu build images
+- name: Download Ubuntu 16.04 iso file
   get_url:
     url: http://192.168.0.114/ubuntu16/ubuntu-16.04.3-server-amd64.iso
     dest: /tmp/ubuntu-16.04.3-server-amd64.iso
     mode: 0777
 
-
-- name: Create directory for iso images
+- name: Create directory for Ubuntu iso images
   file:
     path: /var/www/html/ubuntu16
     state: directory
     mode: 0755
 
-- name: Mount the iso and copy 
+- name: Mount the Ubuntu iso and copy
   shell: mount -o loop /tmp/ubuntu-16.04.3-server-amd64.iso /mnt/
 
-- name: Cp the mounted iso installer
+- name: Copy the mounted Ubuntu iso installer
   shell: cp -fr /mnt/install/netboot/* /var/lib/tftpboot/
 
 ## After the tftp copied, upload the pre-configure menu
@@ -29,18 +28,59 @@
     mode: 0444
     backup: yes
 
-- name: Cp the mounted iso package to www
+- name: Copy the mounted Ubuntu iso package to www
   shell: cp -fr /mnt/* /var/www/html/ubuntu16
 
 ## After the build been copy over, upload the ks file
-- name: Upload kickstart file
+- name: Upload Ubuntu kickstart file
   copy:
-    src: ks.cfg
+    src: ubuntuks.cfg
     dest: /var/www/html/ubuntu16
     owner: root
     group: root
-    mode: 0444
+    mode: 0744
+
+- name: umount Ubuntu iso
+  shell: umount /mnt/
+
+# download the Centos build images
+- name: Download Centos7 iso
+  get_url:
+#    url: http://mirror.fdcservers.net/centos/7/isos/x86_64/CentOS-7-x86_64-DVD-1708.iso
+    url: http://192.168.0.114/centos/CentOS-7-x86_64-DVD-1708.iso
+    dest: /tmp/CentOS-7-x86_64-DVD-1708.iso
+    mode: 0777
+
+- name: Create directory for Centos7 iso images
+  file:
+    path: /var/www/html/centos7
+    state: directory
+    mode: 0755
+
+- name: Create directory for Centos7 in TFTP dir
+  file:
+    path: /var/lib/tftpboot/centos7
+    state: directory
+    mode: 0755
+
+- name: Mount the Centos7 iso
+  shell: mount -o loop /tmp/CentOS-7-x86_64-DVD-1708.iso /mnt/
+
+- name: Copy the mounted Centos pxeboot to TFTP
+  shell: cp /mnt/images/pxeboot/* /var/lib/tftpboot/centos7/
+
+- name: Copy the mounted Centos to www 
+  shell: cp -r /mnt/* /var/www/html/centos7
+
+## After the build been copy over, upload the ks file
+- name: Upload Centos kickstart file
+  copy:
+    src: centosks.cfg
+    dest: /var/www/html/centos7/
+    owner: root
+    group: root
+    mode: 0744
     backup: yes
 
-- name: umount the iso file
+- name: umount Centos7 iso
   shell: umount /mnt/
