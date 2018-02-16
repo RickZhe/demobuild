@@ -1,6 +1,10 @@
 ---
 # tasks file for pxeboot
-- include: install.yml
-- include: configure.yml
-- include: service.yml
-- include: download.yml
+- import_tasks: install.yml
+- import_tasks: configure.yml
+- import_tasks: service.yml
+- import_tasks: download.yml
+#- include: install.yml
+#- include: configure.yml
+#- include: service.yml
+#- include: download.yml

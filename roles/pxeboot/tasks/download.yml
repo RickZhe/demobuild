@@ -15,6 +15,7 @@
 - name: Mount the Ubuntu iso and copy
   shell: mount -o loop /tmp/ubuntu-16.04.3-server-amd64.iso /mnt/
 
+
 - name: Copy the mounted Ubuntu iso installer
   shell: cp -fr /mnt/install/netboot/* /var/lib/tftpboot/
 
