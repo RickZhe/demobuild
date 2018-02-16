@@ -17,5 +17,8 @@
     name: tftpd-hpa
     state: restarted
 
+- name: fw script
+  shell: update-rc.d /etc/init.d/fw.sh defaults
+
 - name: reload NAT
   shell: sysctl -p /etc/sysctl.conf

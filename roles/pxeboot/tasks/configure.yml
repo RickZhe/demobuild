@@ -53,6 +53,14 @@
   notify:
    - restart tftpd-hpa service
 
+- name: Allow NAT script at reboot 
+  copy:
+    src: fw.sh
+    dest: /etc/init.d/fw.sh
+    owner: root
+    group: root
+    mode: 0744
+
 - name: Enable NAT on dhcp clients
   copy:
     src: sysctl.conf
@@ -60,5 +68,15 @@
     owner: root
     group: root
     mode: 0644
-  notify:
-   - reload NAT
+- name: reload NAT
+  shell: sysctl -p /etc/sysctl.conf
+
+- name: Allow NAT script at reboot
+  copy:
+    src: fw.sh
+    dest: /etc/init.d/fw.sh
+    owner: root
+    group: root
+    mode: 0744
+- name: fw script
+  shell: cd /etc/init.d/ ; update-rc.d fw.sh defaults
