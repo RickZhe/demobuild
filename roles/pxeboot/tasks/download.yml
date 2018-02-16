@@ -2,7 +2,7 @@
 # download the build images
 - name: DL the Ubuntu 16.04 iso file
   get_url:
-    url: http://releases.ubuntu.com/16.04/ubuntu-16.04.3-server-amd64.iso
+    url: http://192.168.0.114/ubuntu16/ubuntu-16.04.3-server-amd64.iso
     dest: /tmp/ubuntu-16.04.3-server-amd64.iso
     mode: 0777
 
